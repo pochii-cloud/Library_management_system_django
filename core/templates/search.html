@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+</head>
+<body>
+{% block content %}
+{% if book %}
+    <h2 class="text-center"><strong>search result found</strong></h2>
+<br>
+<div class="mid">
+     <div class="grid">
+         {% for i in book %}
+         <div class="grid-item">
+             <div class="card">
+                 <img class="card-img" src="{{ i.image.url }}" alt="">
+                 <div class="card-content">
+                     <h2 class="card-header">{{i.title}}</h2>
+                     <p class="card-text">
+                         {{ i.author }}
+                         {{ i.pages }}
+                     </p>
+                     <a class="card-btn" href="{% url 'detail' book_id=i.id %}">
+                          more<span>&rarr;</span>
+                     </a>
+                 </div>
+             </div>
+         </div>
+               {% endfor %}
+     </div>
+     </div>
+   {% else %}
+<h2 class="text-center"><strong>Oops!!!</strong>nothing found</h2>
+{% endif %}
+{% endblock %}
+</div>
+</body>
+{% block footer %}
+{% endblock %}
+</html>

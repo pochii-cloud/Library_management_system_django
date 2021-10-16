@@ -1,0 +1,472 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homepage</title>
+   {% include 'links.html' %}
+</head>
+<body>
+ <nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo"><b>SMart</b>Lib</a>
+        <div class="container">
+            <a href="" data-target="menu-responsive" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+       <style>
+           .nav-wrapper{
+               background-color: #3d5afe;
+               font-family: "Roboto",sans-serif;
+           }
+       </style>
+  <!--NAVIGATION-->
+      <ul class="right hide-on-med-and-down">
+    {% if not request.user.is_staff %}
+       <li><a href="{% url 'base' %}">home</a></li>
+      {% endif %}
+      <li><a class='dropdown-trigger' href='#' data-target='dropdown4'>accounts</a></li>
+      {% if not request.user.is_staff %}
+          <li><a href="{% url 'borrowpage' %}">borrowed</a></li>
+      {% endif %}
+          {% if request.user.is_staff %}
+          <li><a href="{% url 'adminview' %}">Admin</a></li>
+          {% endif %}
+        <li><a href="{% url 'contact' %}">contact us</a></li>
+           <li><a href="{% url 'logoutUser' %}">logout</a></li>
+
+
+
+                   <!--dropdown structure 4-->
+      <ul id='dropdown4' class='dropdown-content'>
+         <li><a href="{%  url 'loginview' %}">Login</a></li>
+          <li><a href="{% url 'register' %}">Sign in</a></li>
+      </ul>
+
+
+
+  </ul>
+      </div>
+    </div>
+</nav>
+
+<!---SIDENAV---->
+ <style>
+     .sidenav li a{
+         font-size: 30px;
+         margin-top: 40px;
+         margin-bottom: 40px;
+     }
+ </style>
+ <ul class="sidenav" id="menu-responsive">
+  <div class="search-form">
+        <form method="get" action="{%url 'search'%}">
+    {% csrf_token %}
+    <input type="text"  name="search" placeholder="search"/>
+        <button class="btn btn-danger" type="submit">
+            <i class="material-icons">search</i>search</button>
+    </form>
+     </div>
+    {% if not request.user.is_staff %}
+       <li><a href="{% url 'base' %}">home</a></li>
+      {% endif %}
+      <li><a class='dropdown-trigger' href='#' data-target='dropdown4'>accounts</a></li>
+      {% if not request.user.is_staff %}
+          <li><a href="{% url 'borrowpage' %}">borrowed</a></li>
+      {% endif %}
+          {% if request.user.is_staff %}
+          <li><a href="{% url 'adminview' %}">Admin</a></li>
+          {% endif %}
+        <li><a href="{% url 'contact' %}">contact us</a></li>
+           <li><a href="{% url 'logoutUser' %}">logout</a></li>
+
+
+
+                   <!--dropdown structure 4-->
+      <ul id='dropdown4' class='dropdown-content'>
+         <li><a href="{%  url 'loginview' %}">Login</a></li>
+          <li><a href="{% url 'register' %}">Sign in</a></li>
+      </ul>
+
+
+
+  </ul>
+<!----- END OF NAVIGATION---->
+
+
+ {% block content %}
+     <div class="search-form">
+        <form method="get" action="{%url 'search'%}">
+    {% csrf_token %}
+    <input type="text"  name="search" placeholder="search"/>
+        <button class="btn btn-danger" type="submit">
+            <i class="material-icons">search</i>search</button>
+    </form>
+     </div>
+
+     <h2>latest journals</h2>
+     <div class="mid">
+
+     <div class="grid">
+         {% for book_item in book %}
+             {% if book_item.category.name == 'latestj' %}
+         <div class="grid-item">
+             <div class="card">
+                 <img class="card-img" src="{{ book_item.image.url }}" alt="">
+                 <div class="card-content">
+                     <h2 class="card-header">{{book_item.title}}</h2>
+                     <p class="card-text">
+                         {{ book_item.author }}
+                         {{ book_item.pages }}
+                     </p>
+                     <a class="card-btn" href="{%  url 'detail' book_id=book_item.id  %}">
+                          more<span>&rarr;</span>
+                     </a>
+                 </div>
+             </div>
+         </div>
+              {% endif %}
+               {% endfor %}
+     </div>
+     </div>
+     <div class="mid">
+     <div class="grid">
+          {% for book_item in book %}
+             {% if book_item.category.name == 'latest journals' %}
+         <div class="grid-item">
+             <div class="card">
+                 <img class="card-img" src="{{ book_item.image.url }}" alt="">
+                 <div class="card-content">
+                     <h2 class="card-header">{{book_item.title}}</h2>
+                     <p class="card-text">
+                         {{ book_item.author }}
+                         {{ book_item.pages }}
+                     </p>
+                     <a class="card-btn" href="{%  url 'detail' book_id=book_item.id  %}">
+                          more<span>&rarr;</span>
+                     </a>
+                 </div>
+             </div>
+         </div>
+          {% endif %}
+             {% endfor %}
+     </div>
+     </div>
+     <div class="mid">
+     <div class="grid">
+         {% for book_item in  book %}
+          {% if book_item.category.name == "latestjourn" %}
+         <div class="grid-item">
+             <div class="card">
+                 <img class="card-img" src="{{ book_item.image.url }}" alt="">
+                 <div class="card-content">
+                     <h2 class="card-header">{{ book_item.title }}</h2>
+                     <p class="card-text">
+                         {{ book_item.author }}
+                         {{ book_item.pages }}
+                     </p>
+                     <a class="card-btn" href="{%  url 'detail' book_id=book_item.id  %}">
+                          more<span>&rarr;</span>
+                     </a>
+                 </div>
+             </div>
+         </div>
+           {% endif %}
+      {% endfor %}
+     </div>
+     </div>
+     <h3>borrowable books</h3>
+ <div class="mycarousel">
+<div class="carousel">
+      {% for book_item in book %}
+    {% if book_item.category.name == 'borrowable' %}
+      <div class="carousel-item">
+          <a href="{%  url 'detail' book_id=book_item.id  %}">
+      <img  class="myimage" src="{{book_item.image.url}}" alt="">
+          <p class="white-text">{{ book_item.title }}</p>
+              </a>
+      </div>
+     {% endif %}
+   {% endfor %}
+</div>
+</div>
+     <style>
+         .carousel{
+             background-image: url('{% static 'images/back2.jpg' %}');
+             background-size: cover;
+             background-attachment: fixed;
+             background-repeat: no-repeat;
+             overflow: hidden;
+             {#display: flex;#}
+             height: 400px;
+         }
+          .myimage{
+             margin-bottom: 10px;
+         }
+         h3{
+             text-decoration-line: underline;
+         }
+     </style>
+     <div class="midtwo">
+     <h2>latest e-books</h2>
+         <style>
+             h2{
+                 font-family: sans-serif;
+                 font-size: 30px;
+                 font-weight: normal;
+                 text-decoration-line: underline;
+                 color: black;
+                 margin-left: 400px;
+             }
+         </style>
+         {% for book_item in book %}
+         {% if book_item.category.name == 'latest ebooks' %}
+<div class="blog-post">
+    <div class="blog-post_img">
+        <img src="{{ book_item.image.url }}">
+    </div>
+   <div class="blog-post_info">
+       <div class="blog-post_date">
+           <span></span>
+           <span></span>
+           <span>{{ book_item.author}}</span>
+       </div>
+       <h1 class="blog-post_title">{{ book_item.title }}</h1>
+       <p class="blog-post_text">{{ book_item.pages}}</p>
+       <a href="{%  url 'detail' book_id=book_item.id  %}" class="blog-post_cta">more</a>
+
+   </div>
+</div>
+         {% endif %}
+     {% endfor %}
+       </div>
+     {% include 'intro.html' %}
+     <h2>SEND US FEEDBACK</h2>
+      <div id="bg" style="background-image: url('{% static 'images/back.jpg'%}');">
+<section class="contact">
+<div class="content">
+</div>
+<div class="container3">
+    <div class="containerInfo">
+        <div class="box">
+             <div class="icon"><a href=""><i class="fa fa-map-marker" aria-hidden="true"></i></a></div>
+            <div class="text">
+                <h3>address</h3>
+                <p>7-20300,nyahururu</p>
+            </div>
+        </div>
+        <div class="box" >
+             <div class="icon"><a href=""><i class="fa fa-envelope" aria-hidden="true"></i></a></div>
+            <div class="text">
+                <h3>Email</h3>
+                <p><a href="http://johnmwanikig2000@gmail.com">johnmwanikig2000@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="box">
+             <div class="icon"><i class="fa fa-phone-square" aria-hidden="true"></i></div>
+            <div class="text">
+                <h3>phone</h3>
+                <p>0706219186</p>
+                <p>0741445868</p>
+            </div>
+        </div>
+    </div>
+    <div class="contactForm">
+        <form method="post">
+            {% csrf_token %}
+            <h4>send message</h4>
+            <div class="inputBox">
+                <input type="text" name="username" required="required">
+                <span>username</span>
+            </div>
+             <div class="inputBox">
+                <input type="text" name="email" required="required">
+                <span>Email</span>
+            </div>
+             <div class="inputBox">
+                 <textarea required="required" name="feedback"></textarea>
+                <span>Type your message...</span>
+            </div>
+           <button class="btn btn-success" type="submit">submit</button>
+        </form>
+    </div>
+</div>
+</section>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins',sans-serif;
+}
+ .text {
+            color: #f2f2f2;
+        }
+.contact{
+    position: relative;
+    min-height: 60vh;
+    padding: 50px 100px ;
+    display: flex;
+    {#justify-content: center;#}
+    align-items: center;
+    flex-direction: column;
+    background-image: url('{% static 'images/back.jpg'%}');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.contact .content{
+    max-width: 800px;
+    text-align: center;
+}
+.contact .content h2{
+    font-size: 36px;
+    font-weight: 500;
+    color: #fff;
+}
+.contact .content p{
+    font-weight: 300;
+    color: #fff;
+}
+.container3{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.container3 .contactInfo{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.container3 .contactInfo .box{
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+}
+.container3 .contactInfo .box .icon{
+    min-width: 60px;
+    height: 60px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    font-size: 22px;
+}
+.container3 .contactInfo .box text{
+   display: flex;
+    margin-left: 20px;
+    font-size: 16px;
+    flex-direction: column;
+    font-weight: 300;
+}
+.container3 .contactInfo .box text h3{
+    font-weight: 500;
+    color: #00bcd4;
+}
+.contactForm{
+    width: 40%;
+    padding: 40px;
+    background-color: #fff;
+
+}
+.contactForm h2{
+      font-size: 30px;
+      color: #333;
+      font-weight: 500;
+}
+.contactForm .inputBox{
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+.contactForm .inputBox input,
+.contactForm .inputBox textarea
+{
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px ;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    resize: none;
+}
+.contactForm .inputBox span{
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition:  0.2s;
+    color: #666;
+}
+.contactForm .inputBox input:focus ~span,
+.contactForm .inputBox input:valid ~span,
+.contactForm .inputBox textarea:focus ~span,
+.contactForm .inputBox textarea:valid ~span
+{
+    color: #e91e63;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+.contactForm .inputBox input [type="submit"]{
+    width: 100px;
+    background: #00bcd4 ;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+@media(max-width: 991px) {
+
+    .contact {
+        padding: 50px;
+
+    }
+    .content{
+        margin-top: 0;
+    }
+
+    .container3 {
+        flex-direction: column;
+    }
+    .container3 .contactInfo {
+        margin-bottom: 40px;
+    }
+
+    .container3 .contactInfo,
+    .contactForm {
+        width: 100%;
+    }
+
+}
+</style>
+</div>
+ {% endblock %}
+ {% block footer %}
+<footer>
+<style>
+    .row{
+        background-color: #0d0d0d;
+        color: #fff;
+        display: flex;
+        height: 50px;
+    }
+</style>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content">
+              <p>Copyright &copy; Pochii
+
+            - Design: <a href="">Bigman</a></p>
+            </div>
+          </div>
+        </div>
+    </footer>
+
+ {% endblock %}
+</body>
+</html>

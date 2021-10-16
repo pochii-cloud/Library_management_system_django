@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add book</title>
+</head>
+<body>
+{% block content %}
+    <div class="message">
+    {% for messages in messages %}
+        <p class="mymessage">{{ messages }}!!</p>
+    {% endfor %}
+    </div>
+    <div class="formdiv">
+        <form class="myform" method="post" enctype="multipart/form-data" >
+            <h2>add book</h2>
+             {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-danger">add</button>
+    </form>
+     </div>
+    <style>
+    .message{
+        font-size: 50px;
+        font-weight: normal;
+        color: darkred;
+        text-decoration-line: underline;
+    }
+    .mymessage{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    h2{
+        color: black;
+        text-decoration-line: underline;
+        margin-left: 40px;
+
+    }
+    .formdiv{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5px ;
+    }
+    .myform{
+        width: 500px;
+        border: 5px solid #0d0d0d;
+        background-color: #d3d3d3;
+        display: grid;
+    }
+     @media screen and (max-width: 1000px){
+       .formdiv{
+           margin-top: 150px;
+       }
+         .myform{
+             width: 600px;
+             height: 800px;
+         }
+    }
+    </style>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+</body>
+</html>

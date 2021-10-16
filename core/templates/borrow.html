@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>borrow</title>
+</head>
+<body>
+{% block content %}
+    {% for message in messages %}
+        <h3 class="text">{{ message }}!!</h3><hr>
+    {% endfor %}
+    <style>
+    .text{
+        color: darkred;
+        margin-left: 200px;
+        display: flex;
+    }
+    </style>
+   <table class="striped">
+        <thead>
+          <tr>
+              <th>SN</th>
+              <th>title</th>
+              <th>day</th>
+              <th>due date</th>
+              <th>penalty</th>
+              <th>Action</th>
+          </tr>
+        </thead>
+        {% for book in book %}
+        {% if book.borrowed%}
+        <tbody>
+          <tr>
+              <td> {{forloop.counter}}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.date }}</td>
+            <td>{{ book.date2 }}</td>
+            <td>sh.{{ book.penalty }}</td>
+            <td><a class="btn" href="{% url 'return_view' book.id %}" type="button">return</a></td>
+              <style>
+                  .btn{
+                      background-color: darkred;
+                      color: #FFFFFF;
+                  }
+              </style>
+          </tr>
+        </tbody>
+            {% endif %}
+    {% endfor %}
+      </table>
+
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
+</body>
+</html>

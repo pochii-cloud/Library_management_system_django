@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>details</title>
+</head>
+<body>
+{% block content %}
+    <div class="mid">
+     <div class="grid">
+         <div class="grid-item">
+             <div class="check">
+                 {% if book %}
+                     <div class="heading">remaining {{ book.quantity }}.copies</div>
+                 {% endif %}
+             <style>
+                 .check{
+                     background-color: darkred;
+                     color: #FFFFFF;
+                     height: 30px;
+                 }
+                  .heading{
+                      font-weight: normal;
+                      text-align: center;
+                 }
+             </style>
+             </div>
+             <div class="card">
+                 <img class="card-img" src="{{ book.image.url}}" alt="">
+                 <div class="card-content">
+                     <h2 class="card-header">{{book.title}}</h2>
+                     <p class="card-text">
+                         {{ book.author }}
+                         {{ book.pages }}
+                     </p>
+                         <a class="btn" href="{{ book.AdminUpload.url }}" download="{{ book.AdminUpload.url }}">download</a>
+                         <a class="btn" href="{% url 'borrow_view' book.id %}">borrow</a>
+                 </div>
+             </div>
+         </div>
+     </div>
+     </div>
+{% endblock %}
+</body>
+{% block footer %}
+{% endblock %}
+</html>

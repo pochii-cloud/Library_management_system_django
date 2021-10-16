@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>links</title>
+</head>
+<body>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/style3.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/style2.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/cards.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidenav.css'%}">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9674323289.js" crossorigin="anonymous"></script>
+
+
+
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    {#var elems = document.querySelectorAll('.sidenav');#}
+    {#var instances = M.Sidenav.init(elems);#}
+     M.AutoInit();
+  });
+</script>
+</body>
+</html>

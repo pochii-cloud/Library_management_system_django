@@ -1,0 +1,64 @@
+{% extends 'baseone.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body  style="background-color: navajowhite">
+{% block content %}
+    <h2 class="heading">please login</h2>
+    <div class="form-group">
+     <form class="myform" method="POST">
+ {% csrf_token %}
+             <label>username:
+                 <input type="text" name="username" placeholder="username" class="form-control">
+             </label><br>
+             <label>password:
+                 <input type="password" name="password" placeholder="more than 8 characters" class="form-control">
+             </label><br>
+            <button class="btn" type="submit">login</button>
+             <p>dont have account yet?<a class="text-danger" href="{% url 'register'%}" >sign-in here</a></p>
+     </form>
+    </div>
+      <div class="messages">
+          {% for message in messages %}
+     <p>{{ message }}</p>
+               <p> {{ form.errors }}</p>
+ {% endfor %}
+    </div>
+    <style>
+    .messages{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+         font-weight: lighter;
+        font-size: 20px;
+        color: red;
+    }
+
+    .heading{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    .myform{
+        border: 2px solid whitesmoke;
+        width: 400px;
+        height: auto;
+    }
+    .form-group{
+       justify-content: center;
+        display: flex;
+    }
+    .btn{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    </style>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+</body>
+</html>

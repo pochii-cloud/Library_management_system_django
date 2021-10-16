@@ -1,0 +1,151 @@
+{% load static %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homepage</title>
+   {% include 'links.html' %}
+</head>
+<body>
+ <nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo"><b>SMart</b>Lib<i class="fa fa-book" aria-hidden="true"></i></a>
+        <div class="container">
+            <a href="" data-target="menu-responsive" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+       <style>
+           .nav-wrapper{
+               background-color: #3d5afe;
+               font-family: "Roboto",sans-serif;
+           }
+       </style>
+  <!--NAVIGATION-->
+      <ul class="right hide-on-med-and-down">
+          <li><a href=""><i class="fa fa-graduation-cap" aria-hidden="true"></i>Student</a></li>
+        <li><a href=""><i class="fa fa-user" aria-hidden="true"></i>Admin</a></li>
+
+
+  </ul>
+      </div>
+    </div>
+</nav>
+
+<!---SIDENAV---->
+ <style>
+     .sidenav li a{
+         font-size: 30px;
+         margin-top: 40px;
+         margin-bottom: 40px;
+     }
+ </style>
+ <ul class="sidenav" id="menu-responsive">
+         <li><a href="{% url 'loginstudent' %}"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Student</a></li>
+        <li><a href="{% url 'loginview' %}"><i class="fa fa-user" aria-hidden="true"></i>Admin</a></li>
+
+ </ul>
+<!----- END OF NAVIGATION---->
+{% block content %}
+<!------ SLIDER-------->
+      <h1>login to access featured library services
+     <style>
+         h1{
+         font-weight: lighter;
+         font-family: 'poppins',sans-serif;
+         margin-left: 100px;
+         font-size: 40px;
+         }
+     </style>
+     </h1>
+<div id="slider">
+   <figure>
+
+           <img src="{% static 'images/library_books.jpg' %}" alt="">
+           <img src="{% static 'images/one.jpg' %}" alt="">
+           <img src="{% static 'images/pile.jpg' %}" alt="">
+           <img src="{% static 'images/two.jpg' %}" alt="">
+           <img src="{% static 'images/hero.jpg' %}" alt="">
+
+   </figure>
+</div>
+<!------ END OF SLIDER-------->
+<style>
+    h4{
+        color: #3696dc;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 2px;
+
+    }
+    p{
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .container2{
+        max-width: 1170px;
+        width: 100%;
+        margin: 0 auto;
+       display: flex;
+    }
+    .column{
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12),
+        0 1px 2px rgba(0,0,0, 0.24);
+        background: #fff;
+        border-radius: 10px;
+        flex-basis: 33%;
+        height: 350px;
+        margin: 20px 15px 25px 100px;
+        display: flex;
+    }
+    .card2{
+        padding: 15px 25px;
+    }
+    img{
+        max-width: 100%;
+        height: 250px;
+        display: flex;
+        {#object-fit: cover;#}
+    }
+
+</style>
+<div class="container2">
+        <div class="column">
+            <a href="{% url 'loginview' %}">
+        <div class="card2">
+            <img src="{% static 'images/admin.png' %}">
+            <h4>Admin</h4>
+        </div></a>
+    </div>
+        <div class="column">
+            <a href="{% url 'loginstudent' %}">
+        <div class="card2">
+            <img src="{% static 'images/student.png' %}">
+            <h4>student</h4>
+        </div>
+                </a>
+    </div>
+    </div>
+ {% endblock %}
+{% block footer %}
+<footer>
+<style>
+    .row{
+        background-color: #0d0d0d;
+        color: #fff;
+        display: flex;
+        height: 50px;
+    }
+</style>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content">
+              <p>Copyright &copy; Pochii
+
+            - Design: <a href="">Bigman</a></p>
+            </div>
+          </div>
+        </div>
+    </footer>
+
+ {% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+</head>
+<body>
+{% block content %}
+    <h2 class="acc">Register here</h2>
+    <style>
+    .acc{
+        justify-content: center;
+        text-align: center;
+        display: flex;
+    }
+     .myform{
+        border: 2px solid #F1F1F1;
+        width: 400px;
+        height: auto;
+    }
+    .form-group{
+       justify-content: center;
+        display: flex;
+    }
+    </style>
+<div class="form-group">
+    <form class="myform" method="post">
+    {% csrf_token %}
+        {% for field in form%}
+            <label>{{ field.label }}</label>
+            {{ field}}
+        {% endfor %}
+    <button class="btn" type="submit">sign in</button>
+    <p>have account already?<a href="{% url 'loginview' %}">login here</a></p>
+     <div class="errors">
+        {{ form.errors }}
+    </div>
+    </form>
+</div>
+    <style>
+    .form{
+        height: 200px;
+        display: flex;
+        margin-left: 300px;
+        margin-right: 300px;
+    }
+    .errors{
+        color: red;
+        font-weight: lighter;
+        font-size: 20px;
+    }
+    </style>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+</body>
+</html>
